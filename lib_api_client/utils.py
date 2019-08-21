@@ -9,6 +9,7 @@ from .exception import ResponseParsingException
 import json
 import copy
 import time
+import traceback
 from lxml import objectify
 
 
@@ -54,6 +55,7 @@ def send_third_party_request(
     except ValueError:
         # Programming error
         logger.error('[{}]send_third_party_request|cannot_mask_sensitive_data|data={}'.format(channel_name, data))
+        logger.error(traceback.format_exc())
         raise MaskSensitiveDataException()
 
     logger.debug('[{}]third_party_request_start|endpoint={},params={},method={},headers={}'.format(channel_name, endpoint, masked_data, method, headers))
@@ -111,6 +113,7 @@ def send_third_party_request(
             )
     except:
         logger.error('[{}]request_exception|api={},params={},headers={}'.format(channel_name, endpoint, masked_data, headers))
+        logger.error(traceback.format_exc())
         raise RequestException()
 
     response_to_log = response.content if log_response_data else '******'
@@ -139,6 +142,7 @@ def send_third_party_request(
     except:
         logger.error('[%s]request_decode_exception|api=%s,params=%s,headers=%s,content=%s,response_type=%s',
             channel_name, endpoint, masked_data, headers, response.content, response_type)
+        logger.error(traceback.format_exc())
         raise ResponseParsingException()
 
     if log_response_data:
