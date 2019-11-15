@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="libapiclient",
-    version="0.0.2",
+    version="0.0.3",
     author="jiao.xue",
     author_email="jiao.xuejiao@gmail.com",
     description="API client tools",

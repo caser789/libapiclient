@@ -103,6 +103,23 @@ def send_third_party_request(
                     headers=headers,
                     auth=auth,
                 )
+        elif method == 'DELETE':
+            if is_request_json:
+                response = request_session.delete(
+                    endpoint,
+                    json=data,
+                    timeout=timeout,
+                    headers=headers,
+                    auth=auth,
+                )
+            else:
+                response = request_session.delete(
+                    endpoint,
+                    data=data,
+                    timeout=timeout,
+                    headers=headers,
+                    auth=auth,
+                )
         else:
             response = request_session.get(
                 endpoint,
