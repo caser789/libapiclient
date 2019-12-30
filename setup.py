@@ -1,6 +1,6 @@
 import setuptools
 
-install_requires = ['requests', 'libenum']
+install_requires = ['requests', 'libenum', 'lxml']
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
